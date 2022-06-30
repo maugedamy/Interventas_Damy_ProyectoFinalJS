@@ -1,0 +1,22 @@
+.cardCelulares {
+    text-align: center;
+    align-items: center;
+}
+
+.cardCelulares img {
+    width: 30%;
+} 
+
+.container-sm {
+    text-align: center;
+}
+
+#divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal {
+    max-width: 40% !important
+}
+
+@media (max-width: 768px) {
+    #divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal {
+        max-width: 100% !important
+    }     
+}
