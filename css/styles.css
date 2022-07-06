@@ -11,12 +11,12 @@
     text-align: center;
 }
 
-#divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal {
+#divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal, .container-sm {
     max-width: 40% !important
 }
 
 @media (max-width: 768px) {
-    #divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal {
+    #divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal, .container-sm {
         max-width: 100% !important
     }     
 }

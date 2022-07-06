@@ -84,9 +84,13 @@ function crearID() {
 // }
 
 function filtrarCelular() {
+    debugger
     let filtrar = document.getElementById("inputBuscar").value;
     let resultados = celulares.filter((celular) => celular.nombre().toLowerCase().includes(filtrar.toLowerCase()));
-    if (resultados !== undefined) {
+    if (resultados == undefined || resultados.length == 0) {
+        noResult();
+    }
+    else if (resultados !== undefined) {
         let card = document.getElementsByClassName("cardCelulares");
         if (filtrar != "")
             for (i = 0; i < card.length; i++)
@@ -104,6 +108,16 @@ function agregarCarrito(celular) {
     listaCarrito.appendChild(h3);
     calcularCarrito()
     localStorage.setItem("carrito", JSON.stringify(carrito))
+    mostrarNuevoEnCarrito();
+}
+
+const mostrarNuevoEnCarrito = () => {
+    Swal.fire({
+        icon: 'success',
+        title: 'Agregaste el celular al carrito',
+        // text: 'No hay productos que coincidan con tu búsqueda',
+        confirmButtonText: 'Ok'
+    })
 }
 
 
@@ -122,7 +136,7 @@ const recuperarCarrito = () => {
 
 const vaciarCarrito = () => {
     localStorage.removeItem("carrito");
-    while(carrito.length)
+    while (carrito.length)
         carrito.pop();
     const carritoElements = document.getElementById("divCarrito").childNodes;
     while (carritoElements.length > 1)
