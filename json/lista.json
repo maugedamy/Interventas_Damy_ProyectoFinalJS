@@ -1,0 +1,13 @@
+{
+    "celulares": [
+        {"marca": "Iphone", "modelo": "Iphone12", "precio": 250000, "imagen": "./assets/iphone12.jpg"},
+        {"marca": "Iphone", "modelo": "Iphone13 Pro", "precio": 260000, "imagen": "./assets/iphone13pro.jpg"},
+        {"marca": "Iphone", "modelo": "Iphone SE", "precio": 185000, "imagen": "./assets/iphoneSe.webp"},
+        {"marca": "Samsung", "modelo": "Samsung Galaxy A12", "precio": 60000, "imagen": "./assets/SamsungGalaxyA12.png"},
+        {"marca": "Samsung", "modelo": "Samsung Galaxy S20", "precio": 105000, "imagen": "./assets/SamsungGalaxyS20.jpg"},
+        {"marca": "Samsung", "modelo": "Samsung Galaxy S22", "precio": 170000, "imagen": "./assets/samsungGalaxyS22.png"},
+        {"marca": "Motorola", "modelo": "Motorola Edge 30", "precio": 90000, "imagen": "./assets/MotorolaEdge30.png"},
+        {"marca": "Motorola", "modelo": "Motorola Edge 30 Pro", "precio": 160000, "imagen": "./assets/MotorolaEdge30Pro.png"},
+        {"marca": "Motorola", "modelo": "Motorola Moto G22", "precio": 38000, "imagen": "./assets/MotorolaMotoG22.jpg"}
+    ]
+}
