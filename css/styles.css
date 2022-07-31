@@ -1,3 +1,13 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 .cardCelulares {
     text-align: center;
     align-items: center;
@@ -13,6 +23,37 @@
 
 #divIphone, #divIphone, #divSamsung, #divMotorola, #divCarrito, #precioTotal, .container-sm {
     max-width: 40% !important
+}
+
+#btnVaciarCarrito {
+    background-color: rgb(224, 155, 5);
+}
+
+.bi-trash3 {
+    margin-left: 3rem;
+}
+
+footer {
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.836);
+    padding: 1rem;
+    bottom:0;
+    width: 100%;
+    left:0;
+}
+
+
+/* CheckOut */
+
+#divForm {
+    width: 100%;
+    text-align: center;
+    
+}
+
+#formCheckOut {
+    width: 100%;
+    text-align: center;
 }
 
 @media (max-width: 768px) {

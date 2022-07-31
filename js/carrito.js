@@ -1,15 +1,4 @@
-// function agregarCelular() {
-//     let id = crearID();
-//     let marca = seleccionarMarca().toUpperCase();
-//     let modelo = prompt("Ingresá el modelo del celular").toUpperCase();
-//     let precio = parseFloat(prompt("Ingresá el precio del celular:"));
-//     let imagen = prompt("Ingresá la ubicación de la imagen").toUpperCase();
-
-//     celulares.push(new Celular(id, marca, modelo, precio, imagen));
-//     cargarCelulares(celulares[id - 1]);
-// }
-
-function cargarCelulares(celular) {
+const cargarCelulares = (celular) => {
 
     let marca = celular.marca.toUpperCase();
     let modelo = celular.modelo;
@@ -51,40 +40,12 @@ function cargarCelulares(celular) {
     }
 }
 
-// function seleccionarMarca() {
-//     let marca;
-//     do {
-//         marca = prompt("Seleccioná el número correspondiente a la marca del celular: \n1) Iphone \n2) Samsung \n3) Motorola");
-//         switch (marca) {
-//             case "1":
-//                 marca = "Iphone";
-//                 break;
-//             case "2":
-//                 marca = "Samsung";
-//                 break;
-//             case "3":
-//                 marca = "Motorola"
-//                 break;
-//             default:
-//                 alert("No existe la selección.");
-//                 marca = "-1";
-//                 break;
-//         }
-//     } while (marca == -1)
-//     return marca;
-// }
-
-function crearID() {
+const crearID = () => {
     id++;
     return id;
 }
 
-// function mostrarCelular() {
-//     celulares.forEach((celular)=> console.table(celular));
-// }
-
-function filtrarCelular() {
-    debugger
+const filtrarCelular = () => {
     let filtrar = document.getElementById("inputBuscar").value;
     let resultados = celulares.filter((celular) => celular.nombre().toLowerCase().includes(filtrar.toLowerCase()));
     if (resultados == undefined || resultados.length == 0) {
@@ -101,11 +62,49 @@ function filtrarCelular() {
     }
 }
 
-function agregarCarrito(celular) {
-    carrito.push(celular);
+const crearIDCarrito = () => {
+    idCarrito++;
+    return idCarrito;
+}
+
+const agregarCarrito = (celular) => {
+    if (typeof celular.idCarrito !== 'undefined')
+        idCarrito = celular.idCarrito;
+    else crearIDCarrito();
+    let celularCarrito = celular;
+    celularCarrito.idCarrito = idCarrito;
+    carrito.push(celularCarrito);
     let h3 = document.createElement("h3");
     h3.innerText = celular.modelo;
+    h3.id = `idCarrito${idCarrito}`;
     listaCarrito.appendChild(h3);
+    let span = document.createElement("span");
+    span.style.textAlign = 'right';
+    h3.appendChild(span);
+    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('fill', 'currentColor');
+    svg.setAttribute('viewBox', '0 0 16 16');
+    svg.setAttribute('width', '20');
+    svg.setAttribute('height', '20');
+    svg.classList.add('bi');
+    svg.classList.add('bi-trash3');
+    svg.id = `cestoID${idCarrito}`;
+    span.appendChild(svg);
+    quitarDelCarritoAlert(idCarrito);
+    const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path'
+    );
+
+    path.setAttribute(
+        'd',
+        'M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'
+    );
+    //   path.setAttribute('stroke-linecap', 'round');
+    //   path.setAttribute('stroke-linejoin', 'round');
+    //   path.setAttribute('stroke-width', '2');
+
+    svg.appendChild(path);
     calcularCarrito()
     localStorage.setItem("carrito", JSON.stringify(carrito))
     mostrarNuevoEnCarrito();
@@ -115,13 +114,54 @@ const mostrarNuevoEnCarrito = () => {
     Swal.fire({
         icon: 'success',
         title: 'Agregaste el celular al carrito',
-        // text: 'No hay productos que coincidan con tu búsqueda',
         confirmButtonText: 'Ok'
     })
 }
 
+const quitarDelCarritoAlert = (idCesto) => {
+    const btnCesto = document.getElementById(`cestoID${idCesto}`);
+    btnCesto.addEventListener("click", () => {
+        Swal.fire({
+            title: '¿Está seguro de eliminar el elemento del carrito?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, seguro',
+            cancelButtonText: 'No, no quiero'
+        }).then((result) => {
 
-function calcularCarrito() {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Borrado!',
+                    icon: 'success',
+                    text: 'El elemento ha sido eliminado del carrito'
+                })
+                quitarDelCarrito(idCesto);
+            }
+        })
+    });
+    calcularCarrito();
+}
+
+const quitarDelCarrito = (idCesto) => {
+    const carritoRecuperado = JSON.parse(localStorage.getItem("carrito"));
+    if (carritoRecuperado)
+        localStorage.removeItem("carrito")
+        
+    for (let i = 0; i < carrito.length; i++) {
+        if (carrito[i].idCarrito == idCesto) {
+            carrito.splice(i,1);
+            break;
+        }
+    }
+
+    if (carrito.length > 0)
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+
+    document.getElementById(`idCarrito${idCesto}`).remove();
+    calcularCarrito();
+}
+
+const calcularCarrito = () => {
     let total = carrito.reduce((suma, celular) => suma + celular.precio, 0);
     let h2 = document.getElementById("precioTotal");
     h2.innerText = "Total de compra $ " + total.toLocaleString();
@@ -143,3 +183,5 @@ const vaciarCarrito = () => {
         carritoElements[1].remove();
     calcularCarrito();
 }
+
+

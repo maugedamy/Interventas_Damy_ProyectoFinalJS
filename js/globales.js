@@ -1,8 +1,22 @@
+const body = document.getElementsByTagName("body")[0];
+
+const agregarFooter = () => {
+    let footer = document.createElement("footer");
+    let h6Footer = document.createElement("h6");
+    h6Footer.innerText = "Creado por Mauge. Todos los derechos reservados®";
+    footer.appendChild(h6Footer);
+    body.append(footer);
+}
+
+agregarFooter();
+
 const celulares = [];
 
 let id = 0;
 
 const carrito = [];
+
+let idCarrito = 0;
 
 const listaIphone = document.getElementById("divIphone");
 const listaSamsung = document.getElementById("divSamsung");
@@ -45,3 +59,4 @@ const noResult = () => {
         confirmButtonText: 'Ok'
     })
 }
+
